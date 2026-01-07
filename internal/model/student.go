@@ -15,3 +15,6 @@ type StudentRequest struct {
 	DateOfBirth	string	`json:"date_of_birth"`  // yy-mm-dd
 }
 
+func (Student) TableName() string {
+	return "student"
+}
