@@ -42,11 +42,11 @@ func LoadConfig() (*Config, error) {
 
 func (cfg *Config) GetDSN() string {
 	return fmt.Sprintf(
-		"postgres://%s:%s@%s:%d/%s?sslmode=disable",
-		cfg.DBUser,
-		cfg.DBPassword,
+		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		cfg.DBHost,
 		cfg.DBPort,
+		cfg.DBUser,
+		cfg.DBPassword,
 		cfg.DBName,
 	)
 }

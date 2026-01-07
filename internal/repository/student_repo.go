@@ -25,7 +25,7 @@ func (r *studentRepo) Create(s *model.Student) error {
 }
 
 func (r *studentRepo) GetAll() ([]*model.Student, error) {
-	rows, err := r.db.Query("SELECT id, name, age, date_os_birth FROM student")
+	rows, err := r.db.Query("SELECT id, name, age, date_of_birth FROM student")
 	if err != nil {
 		return nil, err
 	}
