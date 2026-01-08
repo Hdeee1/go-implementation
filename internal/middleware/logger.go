@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -20,6 +19,6 @@ func Logger(next http.Handler) http.Handler {
 
 		// count duration 
 		duration := time.Since(start)
-		fmt.Printf("Completed %s %s in %v", r.Method, r.URL.Path, duration)
+		log.Printf("Completed %s %s in %v", r.Method, r.URL.Path, duration)
 	})
 }

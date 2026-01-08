@@ -27,8 +27,8 @@ func main() {
 
 	router := mux.NewRouter()
 	router.Use(middleware.LoggerMiddleware)
-	middleware.AuthMiddleware(handlers.CreateStudentHandler(repo))
-	router.HandleFunc("/students", handlers.CreateStudentHandler(repo)).Methods("POST")
+	router.HandleFunc("/students", handlers.GetStudentHandler(repo)).Methods("GET")
+	router.Handle("/students", middleware.AuthMiddleware(handlers.CreateStudentHandler(repo))).Methods("POST")
 
 	log.Printf("Server running on :%s", cfg.ServerPort)
 	log.Fatal(http.ListenAndServe(":"+cfg.ServerPort, router))

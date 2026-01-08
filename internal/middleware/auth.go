@@ -4,7 +4,8 @@ import "net/http"
 
 func AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if err := r.Header.Get("Authorization"); err == "" {
+		token := r.Header.Get("Authorization"); 
+		if token == "" {
 			http.Error(w, "Unauthorized", 401)
 			return 
 		}
