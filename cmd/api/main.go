@@ -8,6 +8,7 @@ import (
 	"github.com/Hdeee1/go-implementation/internal/handlers"
 	"github.com/Hdeee1/go-implementation/internal/middleware"
 	"github.com/Hdeee1/go-implementation/internal/repository"
+	"github.com/Hdeee1/go-implementation/migrations"
 	"github.com/gorilla/mux"
 )
 
@@ -22,6 +23,10 @@ func main() {
 		log.Fatal("Failed to connect Database:", err)
 	}
 	defer db.Close()
+
+	if err := migrations.Migrate(db); err != nil {
+		log.Fatal("Migration failed:", err)
+	}
 
 	repo := repository.NewStudentRepo(db)
 
