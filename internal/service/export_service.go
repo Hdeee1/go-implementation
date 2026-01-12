@@ -34,13 +34,14 @@ func (e *ExportService) ExportToCSV(students []*model.Student) ([]byte, error) {
 				strconv.Itoa(student.ID),
 				student.Name,
 				strconv.Itoa(student.Age),
-				student.DateOfBirth.Format("2005-10-19"),
+				student.DateOfBirth.Format("2006-01-02"),
 			}
 
 			write.Write(row)
 			progress := (i + 1) * 100 / count
 			progressCh <- progress
 		}
+		close(progressCh)
 	}()
 
 	for p := range progressCh {

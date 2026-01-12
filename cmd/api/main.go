@@ -29,11 +29,13 @@ func main() {
 	}
 
 	repo := repository.NewStudentRepo(db)
+	
 
 	router := mux.NewRouter()
 	router.Use(middleware.LoggerMiddleware)
 	router.HandleFunc("/students", handlers.GetStudentHandler(repo)).Methods("GET")
 	router.Handle("/students", middleware.AuthMiddleware(handlers.CreateStudentHandler(repo))).Methods("POST")
+	router.HandleFunc("/students/export", handlers.ExportStudentHandler(repo)).Methods("GET")
 
 	log.Printf("Server running on :%s", cfg.ServerPort)
 	log.Fatal(http.ListenAndServe(":"+cfg.ServerPort, router))
