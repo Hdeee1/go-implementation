@@ -15,7 +15,7 @@ func ImportStudentHandler(repo repository.StudentRepository) http.HandlerFunc {
 			return 
 		}
 
-		file, _, err := r.FormFile("File")
+		file, _, err := r.FormFile("file")
 		if err != nil {
 			http.Error(w, "Failed to get file", 400)
 			return 
