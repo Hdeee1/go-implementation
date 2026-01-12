@@ -36,6 +36,7 @@ func main() {
 	router.HandleFunc("/students", handlers.GetStudentHandler(repo)).Methods("GET")
 	router.Handle("/students", middleware.AuthMiddleware(handlers.CreateStudentHandler(repo))).Methods("POST")
 	router.HandleFunc("/students/export", handlers.ExportStudentHandler(repo)).Methods("GET")
+	router.HandleFunc("/", handlers.ImportStudentHandler(repo)).Methods("POST")
 
 	log.Printf("Server running on :%s", cfg.ServerPort)
 	log.Fatal(http.ListenAndServe(":"+cfg.ServerPort, router))
